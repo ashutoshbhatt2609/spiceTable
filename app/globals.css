@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Classic Light Design Tokens ─────────────────────────── */
+:root {
+  --background:          0 0% 97%;
+  --foreground:          220 15% 12%;
+  --card:                0 0% 100%;
+  --card-foreground:     220 15% 12%;
+  --muted:               220 10% 94%;
+  --muted-foreground:    220 8%  48%;
+  --border:              220 10% 88%;
+  --primary:             220 60% 32%;
+  --primary-foreground:  0   0% 100%;
+  --destructive:         0   72% 46%;
+  --success:             142 55% 36%;
+  --warning:             38  80% 44%;
+  --accent:              220 60% 32%;
+
+  /* status badge colours — muted, classic */
+  --status-pending:      38  80% 44%;
+  --status-preparing:    220 60% 45%;
+  --status-ready:        142 55% 36%;
+  --status-served:       220 60% 32%;
+  --status-completed:    220 8%  48%;
+  --status-cancelled:    0   72% 46%;
+}
+
+/* ── Base Reset ────────────────────────────────────────────── */
+*, *::before, *::after {
+  border-color: hsl(var(--border));
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar          { width: 5px; height: 5px; }
+::-webkit-scrollbar-track    { background: hsl(var(--muted)); }
+::-webkit-scrollbar-thumb    { background: hsl(var(--border)); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground)); }
+
+/* ── Focus ring ────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid hsl(var(--primary) / 0.5);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Native form elements ──────────────────────────────────── */
+select, input, textarea {
+  color-scheme: light;
+  background: hsl(var(--card));
+  color: hsl(var(--foreground));
+}
+
+/* ── Status badges ─────────────────────────────────────────── */
+.badge-pending   { background: hsl(var(--status-pending)  / .1); color: hsl(var(--status-pending));   border: 1px solid hsl(var(--status-pending)  / .25); }
+.badge-preparing { background: hsl(var(--status-preparing)/ .1); color: hsl(var(--status-preparing)); border: 1px solid hsl(var(--status-preparing)/ .25); }
+.badge-ready     { background: hsl(var(--status-ready)    / .1); color: hsl(var(--status-ready));     border: 1px solid hsl(var(--status-ready)    / .25); }
+.badge-served    { background: hsl(var(--status-served)   / .1); color: hsl(var(--status-served));    border: 1px solid hsl(var(--status-served)   / .25); }
+.badge-completed { background: hsl(var(--status-completed)/ .08); color: hsl(var(--status-completed)); border: 1px solid hsl(var(--status-completed)/ .2); }
+.badge-cancelled { background: hsl(var(--status-cancelled)/ .1); color: hsl(var(--status-cancelled)); border: 1px solid hsl(var(--status-cancelled)/ .25); }
+
+/* ── Animations ────────────────────────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0);     }
+}
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1;   }
+  50%       { opacity: 0.4; }
+}
+
+.animate-fade-in    { animation: fade-in .25s ease both; }
+.animate-slide-left { animation: slide-in-left .25s ease both; }
+.animate-skeleton   { animation: skeleton-pulse 1.6s ease-in-out infinite; }
